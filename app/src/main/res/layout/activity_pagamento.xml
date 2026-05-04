@@ -5,70 +5,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="32dp"
-    tools:context=".MainActivity">
+    tools:context=".PagamentoActivity">
 
     <TextView
-        android:id="@+id/txtBoasVindas"
+        android:id="@+id/txtTituloPagamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bem-vindo ao Estacionamento"
-        android:textSize="22sp"
+        android:text="Resumo do Ticket"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/edtPlacaBusca"
+        app:layout_constraintBottom_toTopOf="@+id/txtPlacaPagamento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/txtInstrucao"
+        android:id="@+id/txtPlacaPagamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Consulte o status do seu veículo"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBoasVindas" />
-
-    <EditText
-        android:id="@+id/edtPlacaBusca"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:hint="Sua Placa (Ex: ABC-1234)"
-        android:inputType="textCapCharacters"
-        android:textAlignment="center"
+        android:layout_marginTop="24dp"
+        android:text="Placa: ---"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnBuscarPlaca"
+        app:layout_constraintBottom_toTopOf="@+id/txtTempo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtInstrucao" />
-
-    <Button
-        android:id="@+id/btnBuscarPlaca"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"
-        android:text="Buscar Meu Carro"
-        app:layout_constraintBottom_toTopOf="@+id/txtResultado"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPlacaBusca" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloPagamento" />
 
     <TextView
-        android:id="@+id/txtResultado"
+        android:id="@+id/txtTempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Tempo de permanência: 2h 30m"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtValor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPlacaPagamento" />
+
+    <TextView
+        android:id="@+id/txtValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Total: R$ 15,00"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnPagar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTempo" />
+
+    <Button
+        android:id="@+id/btnPagar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textColor="@android:color/holo_blue_dark"
+        android:padding="16dp"
+        android:text="Realizar Pagamento e Liberar Vaga"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBuscarPlaca" />
+        app:layout_constraintTop_toBottomOf="@+id/txtValor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
