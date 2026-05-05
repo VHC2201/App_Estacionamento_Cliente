@@ -32,17 +32,19 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            if (placaDigitada.equals("ABC1234")) {
+            if (placaDigitada.matches("^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$")) {
+
                 binding.txtResultado.setText("✅ Veículo encontrado no pátio!");
                 binding.txtResultado.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
 
-                Intent intent = new Intent(MainActivity.this, PagamentoActivity.class);
+                android.content.Intent intent = new android.content.Intent(MainActivity.this, PagamentoActivity.class);
                 intent.putExtra("PLACA_VEICULO", placaDigitada);
                 startActivity(intent);
 
                 binding.edtPlacaBusca.setText("");
+
             } else {
-                binding.txtResultado.setText("❌ Veículo não encontrado.\n\nVerifique se digitou corretamente.");
+                binding.txtResultado.setText("❌ Formato de placa inválido.\n\nUse o padrão ABC-1234 ou ABC1D23.");
                 binding.txtResultado.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
             }
         });
