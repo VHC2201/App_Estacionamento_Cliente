@@ -13,15 +13,17 @@ public class PagamentoActivity extends AppCompatActivity {
 
     private ActivityPagamentoBinding binding;
 
+    private String placaGlobal = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPagamentoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String placaRecebida = getIntent().getStringExtra("PLACA_VEICULO");
-        if (placaRecebida != null) {
-            binding.txtPlacaPagamento.setText("Placa: " + placaRecebida);
+        placaGlobal = getIntent().getStringExtra("PLACA_VEICULO");
+        if (placaGlobal != null) {
+            binding.txtPlacaPagamento.setText("Placa: " + placaGlobal);
         }
 
         Random random = new Random();
@@ -35,14 +37,24 @@ public class PagamentoActivity extends AppCompatActivity {
         String valorFormatado = String.format(Locale.getDefault(), "Total: R$ %.2f", valorCalculado);
         binding.txtValor.setText(valorFormatado);
 
-        binding.btnPix.setOnClickListener(v -> processarPagamento("PIX"));
-        binding.btnCartao.setOnClickListener(v -> processarPagamento("Cartão de Crédito"));
-        binding.btnDinheiro.setOnClickListener(v -> processarPagamento("Dinheiro"));
+        binding.btnPix.setOnClickListener(v -> processarPagamento("PIX", placaGlobal));
+        binding.btnCartao.setOnClickListener(v -> processarPagamento("Cartão de Crédito", placaGlobal));
+        binding.btnDinheiro.setOnClickListener(v -> processarPagamento("Dinheiro", placaGlobal));
     }
 
-    private void processarPagamento(String formaDePagamento) {
-        String mensagem = "Pagamento via " + formaDePagamento + " aprovado! Catraca liberada.";
-        Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show();
+    private void processarPagamento(String formaDePagamento, String placa) {
+        Toast.makeText(this, "Pagamento via " + formaDePagamento + " aprovado!", Toast.LENGTH_LONG).show();
+
+        android.net.Uri uriDeepLink = android.net.Uri.parse("appadmin://sincronizar?placa=" + placa);
+        android.content.Intent intentSincronizacao = new android.content.Intent(android.content.Intent.ACTION_VIEW, uriDeepLink);
+
+        intentSincronizacao.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        try {
+            startActivity(intentSincronizacao);
+        } catch (android.content.ActivityNotFoundException e) {
+            Toast.makeText(this, "ERRO: O AppAdmin não foi encontrado ou atualizado no emulador!", Toast.LENGTH_LONG).show();
+        }
 
         finish();
     }
